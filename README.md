@@ -1,2 +1,2 @@
-# solc_smtchecker
-docker build file for solc with smtChecker enabled
+# solc_docker
+docker build file for solc with z3 enabled
