@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine AS build
 
 RUN apk update
 RUN apk upgrade
