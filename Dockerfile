@@ -38,6 +38,10 @@ RUN ./scripts/install_deps.sh
 RUN cmake -DCMAKE_BUILD_TYPE=Release -DTESTS=0
 RUN make && make install
 
-WORKDIR /
-RUN rm -rf ${WORKSPACE_DIR}
-ENTRYPOINT ["/usr/local/bin/solc"]
+FROM alpine
+RUN apk add gcc musl
+COPY --from=build /usr/local/bin/solc /usr/bin/
+COPY --from=build /usr/bin/z3 /usr/bin/
+COPY --from=build /usr/include/*z3* /usr/include/
+COPY --from=build /usr/lib/*z3* /usr/lib/
+ENTRYPOINT ["/usr/bin/solc"]
